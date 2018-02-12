@@ -346,6 +346,9 @@
 		<Unit filename="/Users/oshvorak/filler/lib/libft.h">
 			<Option target="filler"/>
 		</Unit>
+		<Unit filename="/Users/oshvorak/filler/src/filler.c">
+			<Option target="filler"/>
+		</Unit>
 		<Unit filename="/Users/oshvorak/filler/src/get_field.c">
 			<Option target="filler"/>
 		</Unit>

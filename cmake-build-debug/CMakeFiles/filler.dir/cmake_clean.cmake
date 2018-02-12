@@ -86,6 +86,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/filler.dir/src/get_field.c.o"
   "CMakeFiles/filler.dir/src/main.c.o"
   "CMakeFiles/filler.dir/src/identify_player.c.o"
+  "CMakeFiles/filler.dir/src/filler.c.o"
   "filler.pdb"
   "filler"
 )
