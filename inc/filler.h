@@ -28,10 +28,13 @@ typedef enum 	e_bool
 }				bool;
 typedef enum 	e_player
 {
+	undefined,
 	O,
 	X
 }				player;
 
-char **get_field(char *line, int fd);
+char	**get_field(char *line, int fd);
+player	identify_player(char **board);
+player	identify_player_fi(char *line, int fd);
 
 #endif

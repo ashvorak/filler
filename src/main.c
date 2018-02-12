@@ -6,25 +6,11 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/11 15:21:19 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:19:54 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/filler.h"
-
-static player check_player(char *line, int fd)
-{
-	player my_player;
-
-	if (ft_strstr(line, "oshvorak"))
-		my_player = O;
-	get_next_line(fd, &line);
-	if (!ft_strstr(line, "oshvorak"))
-		perror("undefined players");
-	else
-		my_player = X;
-	return (my_player);
-}
 
 int main(void)
 {
@@ -34,17 +20,24 @@ int main(void)
 	char 	**piece;
 	player	my_player;
 
+	my_player = undefined;
 	fd = open("./src/file", O_RDONLY);
 	get_next_line(fd, &line);
 	if (*line != 'P')
 	{
-		my_player = check_player(line, fd);
+		my_player = identify_player_fi(line, fd);
 		get_next_line(fd, &line);
 	}
-	ft_printf("%d\n", my_player);
 	board = get_field(line, fd);
 	get_next_line(fd, &line);
 	piece = get_field(line, fd);
+	my_player = (!my_player) ? identify_player(board) : my_player;
+	ft_printf("PLAYER %d\n", my_player);
+	while (*board)
+	{
+		ft_printf("%s\n", *board);
+		board++;
+	}
 	while (*piece)
 	{
 		ft_printf("%s\n", *piece);

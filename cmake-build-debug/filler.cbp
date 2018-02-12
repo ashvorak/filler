@@ -346,10 +346,10 @@
 		<Unit filename="/Users/oshvorak/filler/lib/libft.h">
 			<Option target="filler"/>
 		</Unit>
-		<Unit filename="/Users/oshvorak/filler/src/file">
+		<Unit filename="/Users/oshvorak/filler/src/get_field.c">
 			<Option target="filler"/>
 		</Unit>
-		<Unit filename="/Users/oshvorak/filler/src/get_field.c">
+		<Unit filename="/Users/oshvorak/filler/src/identify_player.c">
 			<Option target="filler"/>
 		</Unit>
 		<Unit filename="/Users/oshvorak/filler/src/main.c">

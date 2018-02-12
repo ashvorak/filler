@@ -92,6 +92,5 @@ add_executable(filler
         lib/ft_tolower.c
         lib/ft_toupper.c
         lib/libft.h
-        src/file
         src/get_field.c
-        src/main.c)
+        src/main.c src/identify_player.c)

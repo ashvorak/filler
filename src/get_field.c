@@ -14,16 +14,9 @@
 
 static int	is_plateau(char *line)
 {
-	int 	i;
-	char	*name;
-
-	i = 0;
-	while (ft_isalpha(line[i]))
-		i++;
-	name = ft_strsub(line, 0 , i);
-	if (!ft_strcmp(name, "Plateau"))
+	if (strstr(line, "Plateau"))
 		return (1);
-	else if (!ft_strcmp(name, "Piece"))
+	else if (strstr(line, "Piece"))
 		return (0);
 	else
 		perror("wrong field name");
@@ -49,42 +42,30 @@ static int	get_X(char *line, bool board)
 	int i;
     int X;
 
-	i = 0;
-	while (!ft_isdigit(line[i]))
-		i++;
+	i = ft_strlen(line) - 1;
 	while (ft_isdigit(line[i]))
-		i++;
-	while (!ft_isdigit(line[i]))
-		i++;
+		i--;
     X = ft_atoi(&line[i]);
 	if (board)
 		X += 4;
-    return (X);
+	return (X);
 }
 
 static char **make_board(char **field, int N)
 {
 	int		i;
-	int 	len;
 	char	**board;
 
 	i = 0;
-	ft_printf("check111\n");
-	//len = ft_strlen(*field);
 	board = (char**)malloc(sizeof(char*) * N);
-	ft_printf("check222\n");
 	while (i < N - 1)
 	{
-		ft_printf("i %d\n", i);
-		board[i] = ft_strsub(field[i + 1], 0, 5);
-		ft_printf("board %s\n", board[i]);
+		board[i] = ft_strsub(field[i + 1], 4, ft_strlen(field[i + 1]) - 4);
 		ft_strdel(&field[i]);
 		i++;
 	}
-	ft_printf("check333\n");
 	board[i] = NULL;
-	//free(field);
-	ft_printf("check444\n");
+	free(field);
 	return (board);
 }
 
@@ -103,19 +84,14 @@ char		**get_field(char *line, int fd)
     field = (char**)malloc(sizeof(char*) * (N + 1));
     while (i < N)
     {
+		ft_strdel(&line);
         field[i] = ft_strnew(X);
         get_next_line(fd, &field[i]);
+		ft_strdel(&line);
         i++;
     }
     field[i] = NULL;
-	while (*field)
-	{
-		ft_printf("%s\n", *field);
-		field++;
-	}
-	ft_printf("check1\n");
 	if (board)
 		field = make_board(field, N);
-	ft_printf("check2\n");
     return (field);
 }
