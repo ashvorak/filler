@@ -1,12 +1,10 @@
 #include "../inc/filler.h"
 
-static bool	check_line(t_game *game)
+static bool	check_row(t_game *game, int j)
 {
 	int i;
-	int j;
 
 	i = 0;
-	j = 0;
 	while (game->piece[i])
 	{
 		if (game->piece[i][j] == '*')
@@ -46,7 +44,7 @@ static bool	fill(int i, int j, t_game *game)
 				else if (game->board[i][j] != '.')
 					return (false);
 			}
-			j++;
+			(j == 0 && !check_row(game, q)) ? ft_printf("NO++\n") : j++;
 			q++;
 		}
 		(i == 0 && !ft_strstr(game->piece[p], "*")) ? 0 : i++;
