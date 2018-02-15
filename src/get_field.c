@@ -42,10 +42,10 @@ static int	get_X(char *line, bool board)
 	int i;
     int X;
 
-	i = ft_strlen(line) - 1;
+	i = ft_strlen(line) - 2;
 	while (ft_isdigit(line[i]))
 		i--;
-    X = ft_atoi(&line[i]);
+    X = ft_atoi(&line[++i]);
 	if (board)
 		X += 4;
 	return (X);
@@ -85,8 +85,9 @@ char		**get_field(char *line, int fd)
     while (i < N)
     {
 		ft_strdel(&line);
-        field[i] = ft_strnew(X);
         get_next_line(fd, &field[i]);
+        if (ft_strlen(field[i]) != X && i != 0)
+			perror("wrong field size");
 		ft_strdel(&line);
         i++;
     }

@@ -2445,33 +2445,6 @@ src/get_field.c.s:
 	$(MAKE) -f CMakeFiles/filler.dir/build.make CMakeFiles/filler.dir/src/get_field.c.s
 .PHONY : src/get_field.c.s
 
-src/identify_player.o: src/identify_player.c.o
-
-.PHONY : src/identify_player.o
-
-# target to build an object file
-src/identify_player.c.o:
-	$(MAKE) -f CMakeFiles/filler.dir/build.make CMakeFiles/filler.dir/src/identify_player.c.o
-.PHONY : src/identify_player.c.o
-
-src/identify_player.i: src/identify_player.c.i
-
-.PHONY : src/identify_player.i
-
-# target to preprocess a source file
-src/identify_player.c.i:
-	$(MAKE) -f CMakeFiles/filler.dir/build.make CMakeFiles/filler.dir/src/identify_player.c.i
-.PHONY : src/identify_player.c.i
-
-src/identify_player.s: src/identify_player.c.s
-
-.PHONY : src/identify_player.s
-
-# target to generate assembly for a file
-src/identify_player.c.s:
-	$(MAKE) -f CMakeFiles/filler.dir/build.make CMakeFiles/filler.dir/src/identify_player.c.s
-.PHONY : src/identify_player.c.s
-
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -2766,9 +2739,6 @@ help:
 	@echo "... src/get_field.o"
 	@echo "... src/get_field.i"
 	@echo "... src/get_field.s"
-	@echo "... src/identify_player.o"
-	@echo "... src/identify_player.i"
-	@echo "... src/identify_player.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

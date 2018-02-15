@@ -26,15 +26,22 @@ typedef enum 	e_bool
 	false,
 	true
 }				bool;
-typedef enum 	e_player
+
+typedef struct	s_coor
 {
-	undefined,
-	O,
-	X
-}				player;
+	int X;
+	int Y;
+}				t_coor;
+
+typedef struct	s_game
+{
+	char 	**board;
+	char 	**piece;
+	char	myplayer;
+	t_coor	*coor;
+}				t_game;
 
 char	**get_field(char *line, int fd);
-player	identify_player(char **board);
-player	identify_player_fi(char *line, int fd);
+int		filler(t_game *game);
 
 #endif

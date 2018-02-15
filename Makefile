@@ -14,7 +14,7 @@ FLAGS = -Wall -Wextra -Werror -I$(INC)
 
 SRC = ./src/main.c \
 	  ./src/get_field.c \
-	  ./src/identify_player.c
+	  ./src/filler.c
 
 GNL = ./lib/get_next_line/get_next_line.c
 

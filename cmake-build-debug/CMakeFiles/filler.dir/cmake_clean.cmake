@@ -83,10 +83,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/filler.dir/lib/ft_swap.c.o"
   "CMakeFiles/filler.dir/lib/ft_tolower.c.o"
   "CMakeFiles/filler.dir/lib/ft_toupper.c.o"
+  "CMakeFiles/filler.dir/src/filler.c.o"
   "CMakeFiles/filler.dir/src/get_field.c.o"
   "CMakeFiles/filler.dir/src/main.c.o"
-  "CMakeFiles/filler.dir/src/identify_player.c.o"
-  "CMakeFiles/filler.dir/src/filler.c.o"
   "filler.pdb"
   "filler"
 )
