@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/16 15:07:20 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/16 17:02:30 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,11 @@ static char	identify_player(int fd)
 	char 	*line;
 	
 	get_next_line(fd, &line);
-	if (ft_strstr(line, "oshvorak.filler"))
-	{
+	if (ft_strstr(line, "$$$ exec p1 : [players/oshvorak.filler]"))
 		my_player = 'O';
-		ft_strdel(&line);
-		get_next_line(fd, &line);
-		ft_strdel(&line);
-	}
 	else
-	{
-		ft_strdel(&line);
-		get_next_line(fd, &line);
-		if (ft_strstr(line, "oshvorak.filler"))
-			my_player = 'X';
-		else
-			perror("undefined players");
-		ft_strdel(&line);
-	}
+		my_player = 'X';
+	ft_strdel(&line);
 	return (my_player);
 }
 
@@ -63,26 +51,30 @@ int main(void)
 	char	my_player;
 	t_game	*game;
 
-	fd = open("./src/file", O_RDONLY);
+	//fd = open("./src/file", O_RDONLY);
+	fd = 0;
 	my_player = identify_player(fd);
 	get_next_line(fd, &line);
-	board = get_field(line, fd);
-	get_next_line(fd, &line);
-	piece = get_field(line, fd);
-	game = new_game(board, piece, my_player);
-	ft_printf("fill %d\n", filler(game));
-	ft_printf("i j %d %d\n", game->coor->X, game->coor->Y);
-	ft_printf("PLAYER %c\n", my_player);
-	while (*board)
+	while (!ft_strstr(line, "Plateau"))
+		get_next_line(fd, &line);
+	while (line && ft_strstr(line, "Plateau"))
 	{
-		ft_printf("%s\n", *board);
-		board++;
+		board = get_field(line, fd);
+		get_next_line(fd, &line);
+		piece = get_field(line, fd);
+		game = new_game(board, piece, my_player);
+		if (filler(game))
+		{
+			ft_printf("%d %d\n", game->coor->X, game->coor->Y);
+			get_next_line(fd, &line);
+		}	
+		else
+			exit(1);
 	}
-	while (*piece)
-	{
-		ft_printf("%s\n", *piece);
-		piece++;
-	}
-	close(fd);
+	//ft_printf("fill %d\n", filler(game));
+	//ft_printf("i j %d %d\n", game->coor->X, game->coor->Y);
+	//ft_printf("PLAYER %c\n", my_player);
+
+	//close(fd);
 	return (0);
 }

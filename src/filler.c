@@ -50,7 +50,7 @@ static bool	fill(int i, int j, t_game *game)
 		(i == 0 && !ft_strstr(game->piece[p], "*")) ? 0 : i++;
 		p++;
 	}
-	ft_printf("check2\n");
+	//ft_printf("check2\n");
 	if (connect != 1)
 		return (false);
 	return (true);
