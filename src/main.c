@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/12 16:19:54 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/16 15:07:20 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char	identify_player(int fd)
 {
 	char	my_player;
 	char 	*line;
-
+	
 	get_next_line(fd, &line);
 	if (ft_strstr(line, "oshvorak.filler"))
 	{
@@ -71,6 +71,7 @@ int main(void)
 	piece = get_field(line, fd);
 	game = new_game(board, piece, my_player);
 	ft_printf("fill %d\n", filler(game));
+	ft_printf("i j %d %d\n", game->coor->X, game->coor->Y);
 	ft_printf("PLAYER %c\n", my_player);
 	while (*board)
 	{

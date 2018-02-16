@@ -44,7 +44,7 @@ static bool	fill(int i, int j, t_game *game)
 				else if (game->board[i][j] != '.')
 					return (false);
 			}
-			(j == 0 && !check_row(game, q)) ? ft_printf("NO++\n") : j++;
+			(j == 0 && !check_row(game, q)) ? 0 : j++;
 			q++;
 		}
 		(i == 0 && !ft_strstr(game->piece[p], "*")) ? 0 : i++;
@@ -68,7 +68,11 @@ int		filler(t_game *game)
 		while (game->board[i][j])
 		{
 			if (fill(i, j, game))
+			{
+				game->coor->X = i;
+				game->coor->Y = j;
 				return (1);
+			}
 			j++;
 		}
 		i++;
