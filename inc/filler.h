@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:40:03 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/10 19:26:16 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:30:16 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct	s_game
 	t_coor	*coor;
 }				t_game;
 
-char	**get_field(char *line, int fd);
+char	**get_field(char *line);
 int		filler(t_game *game);
 
 #endif

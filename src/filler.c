@@ -14,29 +14,52 @@ static bool	check_row(t_game *game, int j)
 	return (false);
 }
 
+static int	generate_p(t_game *game)
+{
+	int i;
+	int p;
+
+	i = 0;
+	p = 0;
+	while (!ft_strstr(game->piece[i++], "*"))
+		p++;
+	return (p);
+}
+
+static int	generate_q(t_game *game)
+{
+	int i;
+	int q;
+
+	i = 0;
+	q = 0;
+	while (!check_row(game, i++))
+		q++;
+	return (q);
+}
+
 static bool	fill(int i, int j, t_game *game)
 {
 	int n;
+	int m;
 	int	p;
 	int	q;
 	int connect;
 
-	p = 0;
+	p = generate_p(game);
+	game->coor->X -= p;
+	m = generate_q(game);
+	game->coor->Y -= m;
 	n = j;
 	connect = 0;
 	while (game->piece[p])
 	{
-		q = 0;
+		q = m;
 		j = n;
 		while (game->piece[p][q])
 		{
 			if (game->piece[p][q] == '*')
 			{
-				//ft_printf("check0\n");
-				//ft_printf("p q %d %d\n", p, q);
-				//ft_printf("piece %c\n", game->piece[p][q]);
-				//ft_printf("i j %d %d\n", i, j);
-				//ft_printf("board %c\n", game->board[i][j]);
 				if (!game->board[i] || !game->board[i][j])
 					return (false);
 				if (game->board[i][j] == game->myplayer)
@@ -44,13 +67,12 @@ static bool	fill(int i, int j, t_game *game)
 				else if (game->board[i][j] != '.')
 					return (false);
 			}
-			(j == 0 && !check_row(game, q)) ? 0 : j++;
+			j++;
 			q++;
 		}
-		(i == 0 && !ft_strstr(game->piece[p], "*")) ? 0 : i++;
+		i++;
 		p++;
 	}
-	//ft_printf("check2\n");
 	if (connect != 1)
 		return (false);
 	return (true);
@@ -67,10 +89,12 @@ int		filler(t_game *game)
 		j = 0;
 		while (game->board[i][j])
 		{
+			game->coor->X = 0;
+			game->coor->Y = 0;
 			if (fill(i, j, game))
 			{
-				game->coor->X = i;
-				game->coor->Y = j;
+				game->coor->X += i;
+				game->coor->Y += j;
 				return (1);
 			}
 			j++;

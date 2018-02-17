@@ -6,18 +6,18 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/17 17:26:02 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 18:37:41 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/filler.h"
 
-static char	identify_player(int fd)
+static char	identify_player()
 {
 	char	my_player;
 	char 	*line;
 	
-	get_next_line(fd, &line);
+	get_next_line(0, &line);
 	if (ft_strstr(line, "oshvorak.filler") && ft_strstr(line, "p1"))
 		my_player = 'O';
 	else
@@ -44,37 +44,29 @@ static t_game *new_game(char **board, char **piece, char my_player)
 
 int main(void)
 {
-	int 	fd;
 	char	*line;
 	char	**board;
 	char 	**piece;
 	char	my_player;
 	t_game	*game;
 	
-	//fd = open("./src/file", O_RDONLY);
-	fd = 0;
-	my_player = identify_player(fd);
-	get_next_line(fd, &line);
+	my_player = identify_player();
+	get_next_line(0, &line);
 	while (!ft_strstr(line, "Plateau"))
-		get_next_line(fd, &line);
+		get_next_line(0, &line);
 	while (line && ft_strstr(line, "Plateau"))
 	{
-		board = get_field(line, fd);
-		get_next_line(fd, &line);
-		piece = get_field(line, fd);
+		board = get_field(line);
+		get_next_line(0, &line);
+		piece = get_field(line);
 		game = new_game(board, piece, my_player);
 		if (filler(game))
 		{
 			ft_printf("%d %d\n", game->coor->X, game->coor->Y);
-			get_next_line(fd, &line);
-		}	
+			get_next_line(0, &line);
+		}
 		else
 			ft_printf("%d %d\n", 0, 0);
 	}
-	//ft_printf("fill %d\n", filler(game));
-	//ft_printf("i j %d %d\n", game->coor->X, game->coor->Y);
-	//ft_printf("PLAYER %c\n", my_player);
-
-	//close(fd);
 	return (0);
 }

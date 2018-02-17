@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_board.c                                        :+:      :+:    :+:   */
+/*   get_field.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 18:59:40 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/11 15:18:55 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:30:43 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ static char **make_board(char **field, int N)
 	return (board);
 }
 
-char		**get_field(char *line, int fd)
+char		**get_field(char *line)
 {
-    int     i;
-    int     N;
-    int     X;
+	int		i;
+    int		N;
+    int		X;
 	bool	board;
-    char    **field;
+    char	**field;
 
     i = 0;
 	board = is_plateau(line) ? true : false;
@@ -85,8 +85,8 @@ char		**get_field(char *line, int fd)
     while (i < N)
     {
 		ft_strdel(&line);
-        get_next_line(fd, &field[i]);
-        if (ft_strlen(field[i]) != X && i != 0)
+        get_next_line(0, &field[i]);
+		if (ft_strlen(field[i]) != X && i != 0)
 			perror("wrong field size");
 		ft_strdel(&line);
         i++;
