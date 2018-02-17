@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:40:03 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/17 17:30:16 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 20:16:17 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,11 @@ typedef struct	s_coor
 
 typedef struct	s_game
 {
+	int		distance;
 	char 	**board;
 	char 	**piece;
 	char	myplayer;
+	t_coor	*coor_buf;
 	t_coor	*coor;
 }				t_game;
 

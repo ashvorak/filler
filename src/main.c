@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/17 18:37:41 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 20:38:57 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,14 @@ static t_game *new_game(char **board, char **piece, char my_player)
 
 	if (!(game = (t_game*)malloc(sizeof(t_game))))
 		return (NULL);
+	game->distance = -1;
 	game->board = board;
 	game->piece = piece;
 	game->myplayer = my_player;
+	if (!(game->coor_buf = (t_coor*)malloc(sizeof(t_coor))))
+		return (NULL);
+	game->coor_buf->X = 0;
+	game->coor_buf->Y = 0;
 	if (!(game->coor = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
 	game->coor->X = 0;
