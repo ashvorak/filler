@@ -1,15 +1,34 @@
-$$$ exec p1 : [players/oshvorak.filler]
+$$$ exec p1 : [players/oshv.filler]
 launched players/oshvorak.filler
-$$$ exec p2 : [players/oshv.filler]
+$$$ exec p2 : [players/oshvorak.filler]
+Plateau 7 8:
+    01234567
+000 ........
+001 XXXoo...
+002 ...ooo..
+003 ...oooO.
+004 .....OO.
+005 ....OOO.
+006 ........
+Piece 1 2:
+**
+
+$$$ exec p1 : [players/oshv.filler]
+launched players/oshvorak.filler
+$$$ exec p2 : [players/oshvorak.filler]
 Plateau 7 8:
     01234567
 000 ........
 001 .X......
 002 ........
-003 ........
-004 .....O..
-005 ........
+003 .....oo.
+004 .....oo.
+005 .....o..
 006 ........
+Piece 3 3:
+.**
+...
+...
 Piece 3 1:
 *
 *

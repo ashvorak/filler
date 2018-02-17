@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/16 17:02:30 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/17 17:26:02 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	identify_player(int fd)
 	char 	*line;
 	
 	get_next_line(fd, &line);
-	if (ft_strstr(line, "$$$ exec p1 : [players/oshvorak.filler]"))
+	if (ft_strstr(line, "oshvorak.filler") && ft_strstr(line, "p1"))
 		my_player = 'O';
 	else
 		my_player = 'X';
@@ -50,7 +50,7 @@ int main(void)
 	char 	**piece;
 	char	my_player;
 	t_game	*game;
-
+	
 	//fd = open("./src/file", O_RDONLY);
 	fd = 0;
 	my_player = identify_player(fd);
@@ -69,7 +69,7 @@ int main(void)
 			get_next_line(fd, &line);
 		}	
 		else
-			exit(1);
+			ft_printf("%d %d\n", 0, 0);
 	}
 	//ft_printf("fill %d\n", filler(game));
 	//ft_printf("i j %d %d\n", game->coor->X, game->coor->Y);
