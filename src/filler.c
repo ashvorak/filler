@@ -105,6 +105,30 @@ static bool	fill(int i, int j, t_game *game)
 	return (true);
 }
 
+static int	dis_x(t_game *game, int i)
+{
+	int x;
+
+	x = 0;
+	while (!ft_strstr(game->board[x], "O") && !ft_strstr(game->board[x], "o"))
+		x++;
+	while ((ft_strstr(game->board[x], "O") || ft_strstr(game->board[x], "o")) && x < i)
+		x++;
+	return (x);	
+}
+
+static int	dis_y(t_game *game, int j)
+{
+	int y;
+
+	y = 0;
+	while (!check_row_board(game, y, 'O') && !check_row_board(game, y, 'o'))
+		y++;
+	while ((check_row_board(game, y, 'O') || check_row_board(game, y, 'o')) && y < j)
+		y++;
+	return (y);	
+}
+
 static bool	check_distance(int i, int j, t_game *game)
 {
 	int n;
@@ -131,14 +155,13 @@ static bool	check_distance(int i, int j, t_game *game)
 				dis = 0;
 				x = 0;
 				y = 0;
-				while (!ft_strstr(game->board[x], "O"))
-					x++;
+				//ft_printf("check1\n");
+				x = dis_x(game, i);
 				dis = (x > i) ? x - i : i - x;
-				ft_printf("dis x %d\n", dis);	
-				while (!check_row_board(game, y, 'O'))
-					y++;
+				//ft_printf("dis x %d\n", dis);	
+				y = dis_y(game, j);
 				dis += (y > j) ? y - j : j - y;
-				ft_printf("dis %d\n", dis);
+				//ft_printf("dis %d\n", dis);
 				if (dis < game->distance || game->distance == -1)
 					game->distance = dis;
 			}
@@ -170,7 +193,7 @@ int		filler(t_game *game)
 			{
 				game->coor_buf->X += i;
 				game->coor_buf->Y += j;
-				ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
+				//ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
 				if (check_distance(i, j, game))
 				{
 					game->coor->X = game->coor_buf->X;
