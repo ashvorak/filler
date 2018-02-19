@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/17 22:04:50 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/17 22:11:48 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/19 19:20:48 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,47 @@ static int	dis_y(t_game *game, int j)
 	return (y);	
 }
 
+static t_coor *ret_dis(t_game *game, int i, int j)
+{
+	int		x;
+	int		y;
+	int		buf;
+	t_coor 	*dis;
+	t_coor	*dis_buf;
+
+	x = 0;
+	if (!(dis = (t_coor*)malloc(sizeof(t_coor))))
+		return (NULL);
+	dis->X = -1;
+	dis->Y = -1;	
+	if (!(dis_buf = (t_coor*)malloc(sizeof(t_coor))))
+		return (NULL);
+	dis_buf->X = -1;
+	dis_buf->Y = -1;	
+	while (!ft_strstr(game->board[x], "O") && !ft_strstr(game->board[x], "o"))
+		x++;
+	while (game->board[x] && (ft_strstr(game->board[x], "O") || ft_strstr(game->board[x], "o")))
+	{
+		y = 0;
+		while (game->board[x][y] != 'O' && game->board[x][y] != 'o')
+			y++;
+		while (game->board[x][y] && (game->board[x][y] == 'O' || game->board[x][y] == 'o'))
+		{
+			buf = (y > j) ? y - j : j - y;
+			dis_buf->Y = (buf < dis_buf->Y || dis_buf->Y == -1) ? buf : dis_buf->Y; 
+			y++;
+		}
+		dis_buf->X = (x > i) ? x - i : i - x;
+		if (dis_buf->X + dis_buf->Y < dis->X + dis->Y || dis->X == -1)
+		{
+			dis->X = dis_buf->X;
+			dis->Y = dis_buf->Y;
+		}
+		x++;
+	}		
+	return (dis);
+}
+
 static bool	check_distance(int i, int j, t_game *game)
 {
 	int n;
@@ -137,7 +178,7 @@ static bool	check_distance(int i, int j, t_game *game)
 	int	q;
 	int x;
 	int y;
-	int dis;
+	t_coor *dis;
 	int ret;
 
 	p = generate_p(game);
@@ -152,18 +193,11 @@ static bool	check_distance(int i, int j, t_game *game)
 		{
 			if (game->piece[p][q] == '*')
 			{
-				dis = 0;
-				x = 0;
-				y = 0;
-				//ft_printf("check1\n");
-				x = dis_x(game, i);
-				dis = (x > i) ? x - i : i - x;
-				//ft_printf("dis x %d\n", dis);	
-				y = dis_y(game, j);
-				dis += (y > j) ? y - j : j - y;
-				//ft_printf("dis %d\n", dis);
-				if (dis < game->distance || game->distance == -1)
-					game->distance = dis;
+				dis = ret_dis(game, i, j);
+				//ft_printf("dis x %d\n", dis->X);	
+				//ft_printf("dis y %d\n", dis->Y);
+				if (dis->X + dis->Y < game->distance || game->distance == -1)
+					game->distance = dis->X + dis->Y;
 			}
 			j++;
 			q++;
@@ -173,7 +207,7 @@ static bool	check_distance(int i, int j, t_game *game)
 	}
 	if (game->distance < ret || ret == -1)
 		return (true);
-	return (false);	
+	return (false);
 }
 
 int		filler(t_game *game)
