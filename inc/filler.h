@@ -35,10 +35,10 @@ typedef struct	s_coor
 
 typedef struct	s_game
 {
-	int		distance;
 	char 	**board;
 	char 	**piece;
 	char	myplayer;
+	t_coor	*distance;
 	t_coor	*coor_buf;
 	t_coor	*coor;
 }				t_game;

@@ -32,7 +32,10 @@ static t_game *new_game(char **board, char **piece, char my_player)
 
 	if (!(game = (t_game*)malloc(sizeof(t_game))))
 		return (NULL);
-	game->distance = -1;
+	if (!(game->distance = (t_coor*)malloc(sizeof(t_coor))))
+		return (NULL);	
+	game->distance->X = -1;
+	game->distance->Y = -1;
 	game->board = board;
 	game->piece = piece;
 	game->myplayer = my_player;

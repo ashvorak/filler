@@ -166,8 +166,13 @@ static t_coor *ret_dis(t_game *game, int i, int j)
 			dis->Y = dis_buf->Y;
 		}
 		x++;
-	}		
+	}
 	return (dis);
+}
+
+static int mod(int x, int y)
+{
+	return((x > y) ? x - y : y - x);
 }
 
 static bool	check_distance(int i, int j, t_game *game)
@@ -176,15 +181,13 @@ static bool	check_distance(int i, int j, t_game *game)
 	int m;
 	int	p;
 	int	q;
-	int x;
-	int y;
 	t_coor *dis;
 	int ret;
 
 	p = generate_p(game);
 	m = generate_q(game);
 	n = j;
-	ret = game->distance;
+	ret = 0;
 	while (game->piece[p])
 	{
 		q = m;
@@ -194,10 +197,23 @@ static bool	check_distance(int i, int j, t_game *game)
 			if (game->piece[p][q] == '*')
 			{
 				dis = ret_dis(game, i, j);
-				//ft_printf("dis x %d\n", dis->X);	
+				//ft_printf("dis x %d\n", dis->X);
 				//ft_printf("dis y %d\n", dis->Y);
-				if (dis->X + dis->Y < game->distance || game->distance == -1)
-					game->distance = dis->X + dis->Y;
+				if (dis->X + dis->Y < game->distance->X + game->distance->Y || game->distance->X == -1)
+					{
+						game->distance->X = dis->X;
+						game->distance->Y = dis->Y;
+						ret = 1;
+					}
+				else if (dis->X + dis->Y == game->distance->X + game->distance->Y)
+				{	
+					if (mod(dis->X, dis->Y) < mod(game->distance->X, game->distance->Y) || game->distance->X == -1)
+					{
+						game->distance->X = dis->X;
+						game->distance->Y = dis->Y;
+						ret = 1;
+					}
+				}
 			}
 			j++;
 			q++;
@@ -205,7 +221,7 @@ static bool	check_distance(int i, int j, t_game *game)
 		i++;
 		p++;
 	}
-	if (game->distance < ret || ret == -1)
+	if (ret == 1)
 		return (true);
 	return (false);
 }
@@ -238,7 +254,7 @@ int		filler(t_game *game)
 		}
 		i++;
 	}
-	if (game->distance != -1)
+	if (game->distance->X != -1)
 		return (1);
 	return (0);
 }
