@@ -12,11 +12,11 @@
 
 #include "../inc/filler.h"
 
-static char	identify_player()
+static char		identify_player(void)
 {
 	char	my_player;
-	char 	*line;
-	
+	char	*line;
+
 	get_next_line(0, &line);
 	if (ft_strstr(line, "oshvorak.filler") && ft_strstr(line, "p1"))
 		my_player = 'O';
@@ -26,14 +26,14 @@ static char	identify_player()
 	return (my_player);
 }
 
-static t_game *new_game(char **board, char **piece, char my_player)
+static t_game	*new_game(char **board, char **piece, char my_player)
 {
 	t_game *game;
 
 	if (!(game = (t_game*)malloc(sizeof(t_game))))
 		return (NULL);
 	if (!(game->distance = (t_coor*)malloc(sizeof(t_coor))))
-		return (NULL);	
+		return (NULL);
 	game->distance->X = -1;
 	game->distance->Y = -1;
 	game->board = board;
@@ -50,14 +50,14 @@ static t_game *new_game(char **board, char **piece, char my_player)
 	return (game);
 }
 
-int main(void)
+int				main(void)
 {
 	char	*line;
 	char	**board;
-	char 	**piece;
+	char	**piece;
 	char	my_player;
 	t_game	*game;
-	
+
 	my_player = identify_player();
 	get_next_line(0, &line);
 	while (!ft_strstr(line, "Plateau"))

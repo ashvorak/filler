@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:40:03 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/19 17:35:11 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/02/20 17:22:22 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ typedef struct	s_game
 
 char	**get_field(char *line);
 int		filler(t_game *game);
+int		generate_p(t_game *game);
+int		generate_q(t_game *game);
+void	print_cr(t_coor *coor, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/23 15:12:57 by oshvorak          #+#    #+#              #
-#    Updated: 2018/02/11 15:32:10 by oshvorak         ###   ########.fr        #
+#    Updated: 2018/02/20 17:23:25 by oshvorak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ FLAGS = -Wall -Wextra -Werror -I$(INC)
 
 SRC = ./src/main.c \
 	  ./src/get_field.c \
-	  ./src/filler.c
+	  ./src/filler.c \
+	  ./src/generate_coor.c \
+	  ./src/print_cr.c
 
 GNL = ./lib/get_next_line/get_next_line.c
 
