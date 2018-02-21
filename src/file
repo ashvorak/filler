@@ -1,14 +1,14 @@
-$$$ exec p1 : [players/oshv.filler]
+$$$ exec p1 : [players/oshvor.filler]
 launched players/oshvorak.filler
 $$$ exec p2 : [players/oshvorak.filler]
 Plateau 7 8:
     01234567
 000 ........
 001 ........
-002 X.......
-003 X....OOO
-004 X.....OO
-005 X...OOOO
+002 XX......
+003 X...OOOO
+004 XX....OO
+005 XX....OO
 006 X......O
 Piece 2 2:
 **

@@ -12,50 +12,33 @@
 
 #include "../inc/filler.h"
 
-static bool	check_row_board(t_game *game, int j, char sym)
-{
-	int i;
-
-	i = 0;
-	while (game->board[i])
-	{
-		if (game->board[i][j] == sym || game->board[i][j] == 'o')
-			return (true);
-		i++;
-	}
-	return (false);
-}
-
 static bool	fill(int i, int j, t_game *game)
 {
-	int n;
-	int m;
 	int	p;
 	int	q;
+	int n;
 	int connect;
 
 	p = generate_p(game);
 	game->coor_buf->X -= p;
-	m = generate_q(game);
-	game->coor_buf->Y -= m;
-	n = j;
+	game->coor_buf->Y -= generate_q(game);
 	connect = 0;
 	while (game->piece[p])
 	{
-		q = m;
-		j = n;
+		q = generate_q(game);
+		n = j;
 		while (game->piece[p][q])
 		{
 			if (game->piece[p][q] == '*')
 			{
-				if (!game->board[i] || !game->board[i][j])
+				if (!game->board[i] || !game->board[i][n])
 					return (false);
-				if (game->board[i][j] == game->myplayer)
+				if (game->board[i][n] == game->myplayer)
 					connect++;
-				else if (game->board[i][j] != '.')
-					return (false);
+				else if (game->board[i][n] != '.')
+					return (false);		
 			}
-			j++;
+			n++;
 			q++;
 		}
 		i++;
@@ -64,52 +47,6 @@ static bool	fill(int i, int j, t_game *game)
 	if (connect != 1)
 		return (false);
 	return (true);
-}
-
-static t_coor *ret_dis(t_game *game, int i, int j)
-{
-	int		x;
-	int		y;
-	int		buf;
-	t_coor 	*dis;
-	t_coor	*dis_buf;
-
-	x = 0;
-	if (!(dis = (t_coor*)malloc(sizeof(t_coor))))
-		return (NULL);
-	dis->X = -1;
-	dis->Y = -1;	
-	if (!(dis_buf = (t_coor*)malloc(sizeof(t_coor))))
-		return (NULL);
-	dis_buf->X = -1;
-	dis_buf->Y = -1;	
-	while (!ft_strstr(game->board[x], "O") && !ft_strstr(game->board[x], "o"))
-		x++;
-	while (game->board[x] && (ft_strstr(game->board[x], "O") || ft_strstr(game->board[x], "o")))
-	{
-		y = 0;
-		while (game->board[x][y] != 'O' && game->board[x][y] != 'o')
-			y++;
-		while (game->board[x][y] && (game->board[x][y] == 'O' || game->board[x][y] == 'o'))
-		{
-			buf = (y > j) ? y - j : j - y;
-			dis_buf->Y = (buf < dis_buf->Y || dis_buf->Y == -1) ? buf : dis_buf->Y; 
-			y++;
-		}
-		dis_buf->X = (x > i) ? x - i : i - x;
-		if (dis_buf->X + dis_buf->Y < dis->X + dis->Y || dis->X == -1)
-		{
-			dis->X = dis_buf->X;
-			dis->Y = dis_buf->Y;
-		}
-		x++;
-	}
-	return (dis);
-}
-
-static int mod(int x, int y)
-{
-	return((x > y) ? x - y : y - x);
 }
 
 static bool	check_distance(int i, int j, t_game *game)
@@ -134,21 +71,14 @@ static bool	check_distance(int i, int j, t_game *game)
 			if (game->piece[p][q] == '*')
 			{
 				dis = ret_dis(game, i, j);
+				ft_printf("dis x %d\n", dis->X);
+				ft_printf("dis y %d\n", dis->Y);
 				if (dis->X + dis->Y < game->distance->X + game->distance->Y || game->distance->X == -1)
 					{
 						game->distance->X = dis->X;
 						game->distance->Y = dis->Y;
 						ret = 1;
 					}
-				else if (dis->X + dis->Y == game->distance->X + game->distance->Y)
-				{	
-					if (mod(dis->X, dis->Y) < mod(game->distance->X, game->distance->Y) || game->distance->X == -1)
-					{
-						game->distance->X = dis->X;
-						game->distance->Y = dis->Y;
-						ret = 1;
-					}
-				}
 			}
 			j++;
 			q++;
@@ -172,17 +102,14 @@ int		filler(t_game *game)
 		j = 0;
 		while (game->board[i][j])
 		{
-			game->coor_buf->X = 0;
-			game->coor_buf->Y = 0;
+			print_cr(game->coor_buf, 0, 0);
 			if (fill(i, j, game))
 			{
 				game->coor_buf->X += i;
 				game->coor_buf->Y += j;
+				ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
 				if (check_distance(i, j, game))
-				{
-					game->coor->X = game->coor_buf->X;
-					game->coor->Y = game->coor_buf->Y;
-				}
+					print_cr(game->coor, game->coor_buf->X, game->coor_buf->Y);
 			}
 			j++;
 		}

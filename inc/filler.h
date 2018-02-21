@@ -38,6 +38,7 @@ typedef struct	s_game
 	char 	**board;
 	char 	**piece;
 	char	myplayer;
+	char	foe;
 	t_coor	*distance;
 	t_coor	*coor_buf;
 	t_coor	*coor;
@@ -45,6 +46,7 @@ typedef struct	s_game
 
 char	**get_field(char *line);
 int		filler(t_game *game);
+t_coor	*ret_dis(t_game *game, int i, int j);
 int		generate_p(t_game *game);
 int		generate_q(t_game *game);
 void	print_cr(t_coor *coor, int x, int y);

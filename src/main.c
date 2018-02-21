@@ -26,7 +26,15 @@ static char		identify_player(void)
 	return (my_player);
 }
 
-static t_game	*new_game(char **board, char **piece, char my_player)
+static char		identify_foe(char my_player)
+{
+	char foe;
+
+	foe = (my_player == 'O') ? 'X' : 'O';
+	return (foe);
+}
+
+static t_game	*new_game(char **board, char **piece, char my_player, char foe)
 {
 	t_game *game;
 
@@ -39,6 +47,7 @@ static t_game	*new_game(char **board, char **piece, char my_player)
 	game->board = board;
 	game->piece = piece;
 	game->myplayer = my_player;
+	game->foe = foe;
 	if (!(game->coor_buf = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
 	game->coor_buf->X = 0;
@@ -67,7 +76,7 @@ int				main(void)
 		board = get_field(line);
 		get_next_line(0, &line);
 		piece = get_field(line);
-		game = new_game(board, piece, my_player);
+		game = new_game(board, piece, my_player, identify_foe(my_player));
 		if (filler(game))
 		{
 			ft_printf("%d %d\n", game->coor->X, game->coor->Y);

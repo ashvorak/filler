@@ -16,7 +16,8 @@ SRC = ./src/main.c \
 	  ./src/get_field.c \
 	  ./src/filler.c \
 	  ./src/generate_coor.c \
-	  ./src/print_cr.c
+	  ./src/print_cr.c \
+	  ./src/ret_dis.c
 
 GNL = ./lib/get_next_line/get_next_line.c
 
