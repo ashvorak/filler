@@ -71,14 +71,12 @@ static bool	check_distance(int i, int j, t_game *game)
 			if (game->piece[p][q] == '*')
 			{
 				dis = ret_dis(game, i, j);
-				ft_printf("dis x %d\n", dis->X);
-				ft_printf("dis y %d\n", dis->Y);
 				if (dis->X + dis->Y < game->distance->X + game->distance->Y || game->distance->X == -1)
-					{
-						game->distance->X = dis->X;
-						game->distance->Y = dis->Y;
-						ret = 1;
-					}
+				{
+					game->distance->X = dis->X;
+					game->distance->Y = dis->Y;
+					ret = 1;
+				}
 			}
 			j++;
 			q++;
@@ -107,7 +105,7 @@ int		filler(t_game *game)
 			{
 				game->coor_buf->X += i;
 				game->coor_buf->Y += j;
-				ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
+				//ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
 				if (check_distance(i, j, game))
 					print_cr(game->coor, game->coor_buf->X, game->coor_buf->Y);
 			}
