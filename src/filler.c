@@ -12,16 +12,25 @@
 
 #include "../inc/filler.h"
 
-static bool	fill(int i, int j, t_game *game)
+static int check_connect(int i, int n, t_game *game, int connect)
 {
-	int	p;
-	int	q;
+	if (!game->board[i] || !game->board[i][n])
+		return (-1);
+	if (game->board[i][n] == game->myplayer)
+		connect++;
+	else if (game->board[i][n] != '.')
+		return (-1);
+	if (connect > 1)
+		return (-1);	
+	return (connect);
+}
+
+static bool fill_me(int p, int i, int j, t_game *game)
+{
+	int q;
 	int n;
 	int connect;
 
-	p = generate_p(game);
-	game->coor_buf->X -= p;
-	game->coor_buf->Y -= generate_q(game);
 	connect = 0;
 	while (game->piece[p])
 	{
@@ -31,12 +40,10 @@ static bool	fill(int i, int j, t_game *game)
 		{
 			if (game->piece[p][q] == '*')
 			{
-				if (!game->board[i] || !game->board[i][n])
+				if (check_connect(i, n, game, connect) == -1)
 					return (false);
-				if (game->board[i][n] == game->myplayer)
-					connect++;
-				else if (game->board[i][n] != '.')
-					return (false);		
+				else
+					connect = check_connect(i, n, game, connect);	
 			}
 			n++;
 			q++;
@@ -44,49 +51,20 @@ static bool	fill(int i, int j, t_game *game)
 		i++;
 		p++;
 	}
-	if (connect != 1)
-		return (false);
-	return (true);
+	return (connect == 1 ? true : false);
 }
 
-static bool	check_distance(int i, int j, t_game *game)
+static bool	fill(int i, int j, t_game *game)
 {
 	int	p;
-	int	q;
-	t_coor	*qj;	
-	t_coor	*dis;
-	int ret;
+	int n;
 
 	p = generate_p(game);
-	qj = new_coor(generate_q(game) ,j);
-	ret = 0;
-	while (game->piece[p])
-	{
-		q = qj->X;
-		j = qj->Y;
-		while (game->piece[p][q])
-		{
-			if (game->piece[p][q] == '*')
-			{
-				dis = ret_dis(game, i, j);
-				//ft_printf("dis x %d\n", dis->X);
-				//ft_printf("dis y %d\n", dis->Y);
-				if (dis->X + dis->Y < game->distance->X + game->distance->Y || game->distance->X == -1)
-				{
-					game->distance->X = dis->X;
-					game->distance->Y = dis->Y;
-					ret = 1;
-				}
-			}
-			j++;
-			q++;
-		}
-		i++;
-		p++;
-	}
-	if (ret == 1)
-		return (true);
-	return (false);
+	game->coor_buf->X -= p;
+	game->coor_buf->Y -= generate_q(game);
+	if (!fill_me(p, i, j, game))
+		return (false);
+	return (true);
 }
 
 int		filler(t_game *game)

@@ -46,6 +46,7 @@ typedef struct	s_game
 
 char	**get_field(char *line);
 int		filler(t_game *game);
+bool	check_distance(int i, int j, t_game *game);
 t_coor	*ret_dis(t_game *game, int i, int j);
 int		generate_p(t_game *game);
 int		generate_q(t_game *game);
