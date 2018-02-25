@@ -51,26 +51,26 @@ static bool	fill(int i, int j, t_game *game)
 
 static bool	check_distance(int i, int j, t_game *game)
 {
-	int n;
-	int m;
 	int	p;
 	int	q;
-	t_coor *dis;
+	t_coor	*qj;	
+	t_coor	*dis;
 	int ret;
 
 	p = generate_p(game);
-	m = generate_q(game);
-	n = j;
+	qj = new_coor(generate_q(game) ,j);
 	ret = 0;
 	while (game->piece[p])
 	{
-		q = m;
-		j = n;
+		q = qj->X;
+		j = qj->Y;
 		while (game->piece[p][q])
 		{
 			if (game->piece[p][q] == '*')
 			{
 				dis = ret_dis(game, i, j);
+				//ft_printf("dis x %d\n", dis->X);
+				//ft_printf("dis y %d\n", dis->Y);
 				if (dis->X + dis->Y < game->distance->X + game->distance->Y || game->distance->X == -1)
 				{
 					game->distance->X = dis->X;

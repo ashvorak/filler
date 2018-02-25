@@ -49,6 +49,7 @@ int		filler(t_game *game);
 t_coor	*ret_dis(t_game *game, int i, int j);
 int		generate_p(t_game *game);
 int		generate_q(t_game *game);
+t_coor	*new_coor(int x, int y);
 void	print_cr(t_coor *coor, int x, int y);
 
 #endif
