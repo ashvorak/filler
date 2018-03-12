@@ -13,7 +13,7 @@ static bool is_bet(int i, int j, t_game *game)
 	}
     return (false);
 }
-
+ 
 bool	check_distance(int i, int j, t_game *game)
 {
 	int	p;
