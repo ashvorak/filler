@@ -26,27 +26,27 @@ static int		get_x(char *line)
 
 static void print_piece(char *line)
 {
-    ft_printf("{bolid}PIECE{eoc}\nX = %d N = %d\n", get_x(line), get_n(line));
+    ft_printf("{eoc}{bolid}PIECE{eoc} (%d, %d)\n", get_x(line), get_n(line));
     get_next_line(0, &line);
     while (ft_strstr(line, ".") || ft_strstr(line, "*"))
     {
         while (*line)
         {
             if (*line == '*')
-                ft_printf("{red}%c", *line);
-            else if (*line == '.')
                 ft_printf("{green}%c", *line);
+            else if (*line == '.')
+                ft_printf("{eoc}%c", *line);
             line++;
         }
         ft_putchar('\n');
         get_next_line(0, &line);
     }
-    ft_printf("{red}%s{eoc}\n", line);
+    ft_printf("{green}%s{eoc}\n", line);
 }
 
 void print_game(char *line)
 {
-    ft_printf("{bolid}BOARD{eoc}\nX = %d N = %d\n", get_x(line), get_n(line));
+    ft_printf("{bolid}BOARD{eoc} (%d, %d)\n", get_x(line), get_n(line));
     get_next_line(0, &line);
     while (*line)
     {
@@ -62,14 +62,14 @@ void print_game(char *line)
         while (*line)
         {
             if (*line == 'X' || *line == 'x')
-                ft_printf("{blue}%C |", 9447);
+                (*line == 'X') ? ft_printf("{blue}%C |", 9447) : ft_printf("{green}%C |", 9447);
             else if (*line == 'O' || *line == 'o')
-                ft_printf("{red}%C |", 9438);
+                (*line == 'O') ? ft_printf("{red}%C |", 9438) : ft_printf("{green}%C |", 9438);
             else if (*line == '.')
-                ft_printf("{green}%c |", *line);
+                ft_printf("{eoc}%c |", *line);
             line++;
         }
-        ft_putchar('\n');
+        ft_printf("{eoc}\n");
         get_next_line(0, &line);
     }
     print_piece(line);
