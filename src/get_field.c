@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 18:59:40 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/20 17:07:25 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:18:10 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int		is_plateau(char *line)
 	return (0);
 }
 
-static int		get_n(char *line, bool board)
+static int		get_n(char *line, t_bool board)
 {
 	int i;
 	int n;
@@ -37,7 +37,7 @@ static int		get_n(char *line, bool board)
 	return (n);
 }
 
-static int		get_x(char *line, bool board)
+static int		get_x(char *line, t_bool board)
 {
 	int i;
 	int x;
@@ -74,7 +74,7 @@ char			**get_field(char *line)
 	int		i;
 	int		n;
 	int		x;
-	bool	board;
+	t_bool	board;
 	char	**field;
 
 	i = 0;
@@ -82,9 +82,9 @@ char			**get_field(char *line)
 	n = get_n(line, board);
 	x = get_x(line, board);
 	field = (char**)malloc(sizeof(char*) * (n + 1));
+	ft_strdel(&line);
 	while (i < n)
 	{
-		ft_strdel(&line);
 		get_next_line(0, &field[i]);
 		if (ft_strlen(field[i]) != x && i != 0)
 			perror("wrong field size");

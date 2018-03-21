@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 17:21:37 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/20 17:22:01 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:14:38 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	print_cr(t_coor *coor, int x, int y)
 {
-	coor->X = x;
-	coor->Y = y;
+	coor->x = x;
+	coor->y = y;
 }

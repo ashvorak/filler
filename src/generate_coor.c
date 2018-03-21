@@ -6,13 +6,13 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/20 17:03:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/20 17:08:56 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:22:20 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/filler.h"
 
-static bool	check_row(t_game *game, int j, char sym)
+static t_bool	check_row(t_game *game, int j, char sym)
 {
 	int i;
 
@@ -26,7 +26,7 @@ static bool	check_row(t_game *game, int j, char sym)
 	return (false);
 }
 
-int			generate_p(t_game *game)
+int				generate_p(t_game *game)
 {
 	int i;
 	int p;
@@ -38,7 +38,7 @@ int			generate_p(t_game *game)
 	return (p);
 }
 
-int			generate_q(t_game *game)
+int				generate_q(t_game *game)
 {
 	int i;
 	int q;

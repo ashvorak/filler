@@ -6,22 +6,22 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:33:18 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/03/21 14:34:00 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:21:08 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/filler.h"
 
-static bool	is_bet(int i, int j, t_game *game)
+static t_bool	is_bet(int i, int j, t_game *game)
 {
 	t_coor	*dis;
 
 	dis = ret_dis(game, i, j);
-	if (dis->X + dis->Y < game->distance->X + game->distance->Y  \
-		|| game->distance->X == -1)
+	if (dis->x + dis->y < game->distance->x + game->distance->y  \
+		|| game->distance->x == -1)
 	{
-		game->distance->X = dis->X;
-		game->distance->Y = dis->Y;
+		game->distance->x = dis->x;
+		game->distance->y = dis->y;
 		free(dis);
 		return (true);
 	}
@@ -29,7 +29,7 @@ static bool	is_bet(int i, int j, t_game *game)
 	return (false);
 }
 
-bool		check_distance(int i, int j, t_game *game)
+t_bool			check_distance(int i, int j, t_game *game)
 {
 	int		p;
 	int		q;
@@ -41,8 +41,8 @@ bool		check_distance(int i, int j, t_game *game)
 	ret = 0;
 	while (game->piece[p])
 	{
-		q = qj->X;
-		j = qj->Y;
+		q = qj->x;
+		j = qj->y;
 		while (game->piece[p][q])
 		{
 			if (game->piece[p][q] == '*')

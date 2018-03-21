@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:33:34 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/03/21 14:33:35 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:17:00 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_coor			*new_coor(int x, int y)
 
 	if (!(coor = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
-	coor->X = x;
-	coor->Y = y;
+	coor->x = x;
+	coor->y = y;
 	return (coor);
 }
 
@@ -49,7 +49,7 @@ static	t_coor	*ret_dis_buf(int x, int j, t_game *game, t_coor *dis)
 		|| game->board[x][y] == game->foe + 32))
 	{
 		buf = (y > j) ? y - j : j - y;
-		dis_buf->Y = (buf < dis_buf->Y || dis_buf->Y == -1) ? buf : dis_buf->Y;
+		dis_buf->y = (buf < dis_buf->y || dis_buf->y == -1) ? buf : dis_buf->y;
 		y++;
 	}
 	return (dis_buf);
@@ -71,9 +71,9 @@ t_coor			*ret_dis(t_game *game, int i, int j)
 		|| ft_strchar(game->board[x], game->foe + 32)))
 	{
 		dis_buf = ret_dis_buf(x, j, game, dis);
-		dis_buf->X = (x > i) ? x - i : i - x;
-		if (dis_buf->X + dis_buf->Y < dis->X + dis->Y || dis->X == -1)
-			print_cr(dis, dis_buf->X, dis_buf->Y);
+		dis_buf->x = (x > i) ? x - i : i - x;
+		if (dis_buf->x + dis_buf->y < dis->x + dis->y || dis->x == -1)
+			print_cr(dis, dis_buf->x, dis_buf->y);
 		free(dis_buf);
 		x++;
 	}

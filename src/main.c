@@ -6,7 +6,7 @@
 /*   By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/10 17:50:01 by oshvorak          #+#    #+#             */
-/*   Updated: 2018/02/19 17:35:07 by oshvorak         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:22:50 by oshvorak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,20 @@ static t_game	*new_game(char **board, char **piece, char my_player, char foe)
 		return (NULL);
 	if (!(game->distance = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
-	game->distance->X = -1;
-	game->distance->Y = -1;
+	game->distance->x = -1;
+	game->distance->y = -1;
 	game->board = board;
 	game->piece = piece;
 	game->myplayer = my_player;
 	game->foe = foe;
 	if (!(game->coor_buf = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
-	game->coor_buf->X = 0;
-	game->coor_buf->Y = 0;
+	game->coor_buf->x = 0;
+	game->coor_buf->y = 0;
 	if (!(game->coor = (t_coor*)malloc(sizeof(t_coor))))
 		return (NULL);
-	game->coor->X = 0;
-	game->coor->Y = 0;
+	game->coor->x = 0;
+	game->coor->y = 0;
 	return (game);
 }
 
@@ -70,7 +70,10 @@ int				main(void)
 	my_player = identify_player();
 	get_next_line(0, &line);
 	while (!ft_strstr(line, "Plateau"))
+	{
 		get_next_line(0, &line);
+		ft_strdel(&line);
+	}	
 	while (line && ft_strstr(line, "Plateau"))
 	{
 		board = get_field(line);
@@ -79,11 +82,12 @@ int				main(void)
 		game = new_game(board, piece, my_player, identify_foe(my_player));
 		if (filler(game))
 		{
-			ft_printf("%d %d\n", game->coor->X, game->coor->Y);
+			ft_printf("%d %d\n", game->coor->x, game->coor->y);
 			get_next_line(0, &line);
 		}
 		else
 			ft_printf("%d %d\n", 0, 0);
 	}
+	//???ft_strdel(&line);
 	return (0);
 }
