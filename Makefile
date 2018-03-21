@@ -6,19 +6,22 @@
 #    By: oshvorak <oshvorak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/23 15:12:57 by oshvorak          #+#    #+#              #
-#    Updated: 2018/02/20 17:23:25 by oshvorak         ###   ########.fr        #
+#    Updated: 2018/03/21 16:09:01 by oshvorak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAGS = -Wall -Wextra -Werror -I$(INC)
 
-SRC = ./src/main.c \
+SRC1 = ./src/main.c \
 	  ./src/get_field.c \
 	  ./src/filler.c \
 	  ./src/generate_coor.c \
 	  ./src/print_cr.c \
 	  ./src/ret_dis.c \
 	  ./src/check_distance.c
+
+SRC2 =  ./src/visual/main.c \
+		./src/visual/print_game.c
 
 GNL = ./lib/get_next_line/get_next_line.c
 
@@ -109,5 +112,6 @@ LIBFT = ./lib/ft_atoi.c \
 
 INC = ./inc
 
-all: 
-	gcc $(SRC) $(LIBFT) $(FT_PRINTF) $(GNL) -o oshvorak.filler
+all:
+	gcc $(SRC1) $(LIBFT) $(FT_PRINTF) $(GNL) -o oshvorak.filler
+	gcc $(FLAGS) $(SRC2) $(LIBFT) $(FT_PRINTF) $(GNL) -o visual

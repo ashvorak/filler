@@ -12,7 +12,7 @@
 
 #include "../inc/filler.h"
 
-static int check_connect(int i, int n, t_game *game, int connect)
+static int	check_connect(int i, int n, t_game *game, int connect)
 {
 	if (!game->board[i] || !game->board[i][n])
 		return (-1);
@@ -21,11 +21,11 @@ static int check_connect(int i, int n, t_game *game, int connect)
 	else if (game->board[i][n] != '.')
 		return (-1);
 	if (connect > 1)
-		return (-1);	
+		return (-1);
 	return (connect);
 }
 
-static bool fill_me(int p, int i, int j, t_game *game)
+static bool	fill_me(int p, int i, int j, t_game *game)
 {
 	int q;
 	int n;
@@ -43,7 +43,7 @@ static bool fill_me(int p, int i, int j, t_game *game)
 				if (check_connect(i, n, game, connect) == -1)
 					return (false);
 				else
-					connect = check_connect(i, n, game, connect);	
+					connect = check_connect(i, n, game, connect);
 			}
 			n++;
 			q++;
@@ -67,7 +67,7 @@ static bool	fill(int i, int j, t_game *game)
 	return (true);
 }
 
-int		filler(t_game *game)
+int			filler(t_game *game)
 {
 	int i;
 	int j;
@@ -83,7 +83,6 @@ int		filler(t_game *game)
 			{
 				game->coor_buf->X += i;
 				game->coor_buf->Y += j;
-				//ft_printf("X Y %d %d\n", game->coor_buf->X, game->coor_buf->Y);
 				if (check_distance(i, j, game))
 					print_cr(game->coor, game->coor_buf->X, game->coor_buf->Y);
 			}

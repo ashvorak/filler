@@ -14,9 +14,9 @@
 
 static int		is_plateau(char *line)
 {
-	if (strstr(line, "Plateau"))
+	if (ft_strstr(line, "Plateau"))
 		return (1);
-	else if (strstr(line, "Piece"))
+	else if (ft_strstr(line, "Piece"))
 		return (0);
 	else
 		perror("wrong field name");

@@ -26,7 +26,7 @@ static bool	check_row(t_game *game, int j, char sym)
 	return (false);
 }
 
-int	generate_p(t_game *game)
+int			generate_p(t_game *game)
 {
 	int i;
 	int p;
@@ -38,7 +38,7 @@ int	generate_p(t_game *game)
 	return (p);
 }
 
-int	generate_q(t_game *game)
+int			generate_q(t_game *game)
 {
 	int i;
 	int q;

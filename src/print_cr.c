@@ -12,7 +12,7 @@
 
 #include "../inc/filler.h"
 
-void print_cr(t_coor *coor, int x, int y)
+void	print_cr(t_coor *coor, int x, int y)
 {
 	coor->X = x;
 	coor->Y = y;
